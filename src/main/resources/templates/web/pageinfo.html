@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>pageinfo</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<link href="web/css/haiersoft.css" rel="stylesheet" type="text/css"
+	media="screen,print" />
+<link href="web/css/print.css" rel="stylesheet" type="text/css"
+	media="print" />
+<script src="web/js/jquery-1.10.1.min.js"></script>
+<script src="web/js/side.js" type="text/javascript"></script>
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+</head>
+
+<body>
+<!-- MainForm -->
+	<div id="MainForm">
+		<div class="form_boxA">
+			<h2>元素信息</h2>
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<th>页面名称</th>
+					<th>元素名称</th>
+					<th>定位元素方式</th>
+					<th>元素类型</th>
+
+					<th>操作</th>
+				</tr>
+				<tr th:each="zdy : ${pagelist}">
+					<td th:text="${zdy.pagename}">Onions</td>
+					<td th:text="${zdy.elename}">Onions</td>
+					<td th:text="${zdy.eleby}">Onions</td>
+
+					<td th:text="${zdy.eletype}">Onions</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><a href="#">查看</a> | <a href="#">操作</a>
+				</tr>
+			</table>
+			
+		</div>
+	</div>
+</body>
+</html>

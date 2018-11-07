@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>下拉框</title>
+<script src="js/jquery-1.5.2.min.js" type="text/javascript"
+	charset="utf-8"></script>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="generator" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<link href="web/css/haiersoft.css" rel="stylesheet" type="text/css"
+	media="screen,print" />
+<link href="web/css/print.css" rel="stylesheet" type="text/css"
+	media="print" />
+<script src="web/js/jquery-1.10.1.min.js"></script>
+<script src="web/js/side.js" type="text/javascript"></script>
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+</head>
+
+<body>
+	<!-- Popup -->
+	<div id="Popup">
+
+		<!-- SubPopup -->
+		<div id="SubPopup">
+			<script>
+				$(document).ready(
+						function() {
+							var url = "http://localhost:8080/getpagename";
+							$.ajax({
+								type : "get",
+								url : url,//访问后台去数据库查询select的选项
+								success : function(data) {
+									var unitObj = document
+											.getElementById("pagename0"); //页面上的<html:select>元素
+									if (data != null) { //后台传回来的select选项
+										for ( var i = 0; i < data.length; i++) {//遍历后台传回的结果，一项项往select中添加option
+											unitObj.options.add(new Option(
+													data[i], data[i]));
+										}
+									}
+								},
+								error : function() {
+									alert('不能为空');
+								}
+							})
+
+						})
+			</script>
+			<script>
+				$(document).ready(
+						function() {
+							var url = "http://localhost:8080/getdocase";
+							$.ajax({
+								type : "get",
+								url : url,//访问后台去数据库查询select的选项
+								success : function(data) {
+									var unitObj = document
+											.getElementById("doname"); //页面上的<html:select>元素
+									if (data != null) { //后台传回来的select选项
+										for ( var i = 0; i < data.length; i++) {//遍历后台传回的结果，一项项往select中添加option
+											unitObj.options.add(new Option(
+													data[i], data[i]));
+										}
+									}
+								},
+								error : function() {
+									J.alert('不能为空');
+								}
+							})
+
+						})
+				$(document).ready(
+						function() {
+							var url = "http://localhost:8080/geteleby";
+							$.ajax({
+								type : "get",
+								url : url,//访问后台去数据库查询select的选项
+								success : function(data) {
+									var unitObj = document
+											.getElementById("eleby"); //页面上的<html:select>元素
+									if (data != null) { //后台传回来的select选项
+										for ( var i = 0; i < data.length; i++) {//遍历后台传回的结果，一项项往select中添加option
+											unitObj.options.add(new Option(
+													data[i], data[i]));
+										}
+									}
+								},
+								error : function() {
+									J.alert('不能为空');
+								}
+							})
+
+						})
+			</script>
+
+			<form action="/docase" method="post" id="form" name="form">
+				<input type="text" id="url" name="url" placeholder="请输入网址" required="required">
+					<div id="info" class="1">
+						<select id="pagename0" name="pagename0" onchange="loadInfo(0)">
+							<option selected="selected">请选择页面</option>
+						</select> <select id="elename0" name="elename0">
+							<option selected="selected">请选择元素名称</option>
+						</select> <select id="eleby" name="eleby">
+							<option selected="selected">请选择元素定位方式</option>
+						</select> <select id="doname" name="doname">
+							<option selected="selected">请选择操作</option>
+						</select> <input type="text" id="sendinfo" name="sendinfo"
+							placeholder="*这里写入输入信息">
+					</div>
+					<div id="olddiv">
+						<input type="submit" value="提交" name="Submit" >
+						<input type="button" value="添加一行" onclick="addYuan()">
+					</div>
+
+			</form>
+</body>
+<script>
+function arrayData(){            
+    var array = $("input[name='form']");
+    var dataArray = new Array();    
+    array.each(function(){
+        dataArray.push($(this).val());
+    });            
+    //alert(dataArray);
+    console.log(dataArray);
+    $.ajax({            
+         type: "post",
+         url: "docase",
+         dataType: "json",
+         traditional: true,
+         data: {
+                array: dataArray
+         },                              
+         success: function(data){
+            for ( var i = 0; i < data.length; i++) {
+                alert(data[i]);
+            }        
+         }
+    });
+}
+</script>
+<script>
+	function addyang(){
+	var info=document.getElementById("info");
+	var div = document.createElement("div");
+	div.setAttribute("id", "newDiv");
+	div.setAttribute("value","newDiv");
+	div.setAttribute("type","select");
+	div.appendChild(document.createTextNode("选择我"));
+	<!--div.innerHTML = "js 动态添加div";-->
+　	info.appendChild(div);
+	}
+</script>
+<script type="text/javascript">
+	var i=0;
+	function addYuan() {
+	     i++;
+		 //var info = "";
+		 if(i-1==0){
+		  info= document.getElementById("info");
+		 }else{
+		  info= document.getElementById("info"+(i-1));
+		 }
+		var clonedNode = info.cloneNode(true); // 克隆节点 
+			clonedNode.setAttribute("id", "info"+i+""); // 修改一下id 值，避免id 重复 
+			clonedNode.children[0].setAttribute("id", "pagename"+i);
+			clonedNode.children[0].setAttribute("name", "pagename0");
+			clonedNode.children[0].setAttribute("onchange", "loadInfo("+i+")");
+			clonedNode.children[1].setAttribute("id", "elename"+i);
+			clonedNode.children[1].setAttribute("name", "elename0");
+
+			clonedNode.children[2].setAttribute("id", "eleby"+i);
+			clonedNode.children[2].setAttribute("name", "eleby0");
+
+			clonedNode.children[3].setAttribute("id", "doname"+i);
+			clonedNode.children[3].setAttribute("name", "doname0");
+
+			clonedNode.children[4].setAttribute("id", "sendinfo"+i);
+			clonedNode.children[4].setAttribute("name", "sendinfo0");
+
+			var parent = info.parentNode;
+			parent.insertBefore( clonedNode, info.nextSibling );
+	}
+
+</script>
+<script>
+	function loadInfo(index) {
+		var mySelect = $("#pagename"+index).val();
+		console.log(mySelect);
+		//alert(upkindId);
+		$("#elename"+index+" option").remove();
+		$("#elename"+index).append("<option value='-1' selected>---请选择---</option>");
+		$.ajax({
+			url : "http://localhost:8080/getelename",
+			type : "post",
+			dataType : "json",
+			data : {
+				pagename : mySelect
+			},
+			success : function(data, textStatus) {
+				//alert(textStatus);  
+				
+				$.each(data, function(n, value) {
+					console.log(n+value);
+					var str = "<option value='"+ value +"' >" + value
+							+ " </option>";
+					$("#elename"+index).append(str);
+				});
+			},
+			error : function(data) {
+				alert("分页出错~");
+			}
+		});
+	}
+	//增加借款合同模板：
+$('#addMore').click(function(){
+	
+	$.ajax({
+		type: 'POST',
+		dataType: 'text',
+		url: EossGlobal.basePath + '/contractStandard/queryContractStandardEditInfo.ac',
+		success: function(data){
+			var json = JSON.parse(data);
+			
+			var item='<div class="row-fluid" id="removeBtn'+(count+1)+' value="'+(count+1)+'">'
+			        +'<div class="control-group">'
+		            +'<label class="control-label">借款合同模板'+(count+1)+'：</label>'
+		            +'<div class="controls">'
+			        +'<select name="loanContract'+(count+1)+'" id="loanContract'+(count+1)+'" class="m-wrap medium" check-type="required">'
+			        +'<option value="">--请选择--</option>'
+			    
+			if(null != data && data.length > 0){
+				
+				$.each(json.loanContractList, function(index,values){   
+					item += '<option value="'+values.contractAbbreviation+'" selected>'+values.contractAbbreviationName+'</option>';
+				});
+			}
+			item +='</select>'
+			item +='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+		         +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+		         +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+		         +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+		         +'<font size="2px">借款模板协议'+(count+1)+':</font>&nbsp;&nbsp;&nbsp;&nbsp;'
+		         +'<select name="loanAgreement'+(count+1)+'" id="loanAgreement'+(count+1)+'" class="m-wrap medium" check-type="required">'
+		         +'<option value="">--请选择--</option>'
+		        
+	        if(null != data && data.length > 0){
+					
+					$.each(json.loanAgreementList, function(index,values){   
+						item += '<option value="'+values.contractAbbreviation+'" selected>'+values.contractAbbreviationName+'</option>';
+					});
+			}
+			item +='</select>&nbsp;'
+				 +'<button class="btn green" onclick="deleteTemple(this,'+count+')" type="button">删除</button>';
+			updateCount();
+			$('#addMordSource').append(item);
+		}
+	})
+})
+$('#addMore').click(function(){	
+	var content='<div id="removeBtn">'
+				+'<div class="control-group">'
+  				+'<label class="control-label">派息时间&nbsp;&nbsp;&nbsp;</label>'
+  				+'<div class="controls">'
+  				+'<div class="input-append date form_date">'
+  				+'<input type="text" id="interestTime" name="interestTime" check-type="required " />'
+  				+'<span class="add-on"> <i class="icon-calendar"></i> </span>'
+  				+'</div>&nbsp;'
+  				+'<button id="addMore" class="btn green" type="button" onclick="removeBtn();">移除</button>'
+  				+'</div>'
+  				+'</div>'
+  				+'</div>';
+  	$('#addMordTime').before(content);	
+  	window.parent.SetCwinHeight();
+  	App.init();
+	$('.form_date').datetimepicker({
+		pickerPosition: 'bottom-left',
+		format: 'yyyy-mm-dd',
+		weekStart: 1,
+	    todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+	    forceParse: 0
+	});
+})
+function removeBtn(){
+	$("#removeBtn").remove();
+}
+</script>
+</html>

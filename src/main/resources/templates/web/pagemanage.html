@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>页面元素管理</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <form name="f1" id="f1" action="/page/setpagemanage" method="post">
+      <table border="0">
+        <tr>
+          <td>页面名称:</td>
+          <td><input type="text" name="pagename" id="pagename" size="10px"></td>
+        </tr>
+        <tr>
+          <td>元素名称:</td>
+          <td><input type="text" name="elename" id="elename" size="10px"></td>
+          <td>元素定位方式：</td>
+          <td><input type="text" name="eleby" id="eleby" size="10px"></td>
+          <td>元素类型：</td>
+          <td><input type="text" name="eletype" id="eletype" size="10px"></td>
+         
+        </tr>
+        <tr>
+          
+        
+          <td colspan="2" align="center"><input type="submit"></td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

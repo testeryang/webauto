@@ -1,0 +1,8 @@
+#数据库连接配置
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5
+server:
+  session-timeout : 3600
+  port: 8080
+

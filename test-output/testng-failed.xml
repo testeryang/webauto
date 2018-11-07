@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Command line suite]">
+  <test name="Command line test(failed)">
+    <classes>
+      <class name="com.neo.servicesimpl.docaseservicesimpl">
+        <methods>
+          <include name="docase"/>
+        </methods>
+      </class> <!-- com.neo.servicesimpl.docaseservicesimpl -->
+    </classes>
+  </test> <!-- Command line test(failed) -->
+</suite> <!-- Failed suite [Command line suite] -->
