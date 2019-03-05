@@ -1,24 +1,21 @@
 package com.neo.servicesimpl;
 
-import java.util.concurrent.TimeUnit;
-
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
 
-import com.neo.handle.TestngListener;
+import java.util.concurrent.TimeUnit;
 
 //@Listeners({TestngListener.class})
 public class docaseservicesimpl {
-	
-	public static WebDriver driver =new FirefoxDriver();
+    static { System.setProperty("webdriver.gecko.driver","C:\\Program Files\\Mozilla Firefox\\geckodriver.exe");}
 
+    public static WebDriver driver =new FirefoxDriver();
+	static{driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);}
 //    @DataProvider(name = "test1")
 //    public static Object[][] primeNumbers(String pagename,String elename,String doname,String url,String sendinfo,String eleby) {
 //    	
@@ -34,11 +31,12 @@ public class docaseservicesimpl {
 	
 //	@Test
 	public static void docase(String elename,String doname,String url,String sendinfo,String eleby) {
-		if (url!=null){
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		if (StringUtils.isNotBlank(url)){
+
 			driver.get(url);
 		}else if (url==null){
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		}
 		try {
 
@@ -118,14 +116,13 @@ public class docaseservicesimpl {
 		Assert.assertEquals(0, 0);
 		Thread.sleep(2000);
 		
-		driver.quit();
+//		driver.quit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		finally {driver.quit();driver=null;}
+//		finally {driver.quit();driver=null;}
 		
 	}
-
 
 }

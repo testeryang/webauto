@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.neo.Entity.PageEntity;
 import com.neo.services.ResultService;
 import com.neo.services.pageservices;
-import com.neo.servicesimpl.docaseservicesimpl;
+
 
 @Controller
 @RequestMapping("page")
@@ -27,7 +27,9 @@ public class PageController {
 	private pageservices pageservices;
 	@Autowired
 	private ResultService resultservice;
+
 	
+
 	@RequestMapping("/getpageinfo")
 	public String all(){
 		List<PageEntity> allinfo=pageservices.getAll();

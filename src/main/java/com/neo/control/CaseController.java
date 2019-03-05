@@ -78,15 +78,18 @@ public class CaseController {
 	
 	}
 	@RequestMapping(value ="docase")
-	public String docase(String[] pagename0,String[] elename0,String[] doname,String url,String[] sendinfo,String[] eleby,HttpServletRequest request){
+	public String docase(String[] pagename0,String[] elename0,String[] doname0,String url,String[] sendinfo0,String[] eleby0,HttpServletRequest request){
 		String[] data=request.getParameterValues("Submit");
 //        testNG.setTestClasses(new Class[]{docaseservicesimpl.class});
 //        testNG.run();
-
 		System.out.println(pagename0.length);
-		for (int i = 0; i < data.length; i++) {
-			docaseservicesimpl.docase(elename0[i], doname[i], url, sendinfo[i], eleby[i]);
+		for (int i = 0; i < pagename0.length; i++) {
+			if(i>0){
+				url=null;
+			}
+			docaseservicesimpl.docase(elename0[i], doname0[i], url, sendinfo0[i], eleby0[i]);
 		}
+
 
 //		for (int i=0; i<pagename0.length; i++){
 //			docaseservicesimpl.docase(elename0[i], doname[i], url, sendinfo[i], eleby[i]);
@@ -103,6 +106,8 @@ public class CaseController {
 		
 		return "正在执行脚本！请勿操作！";
 	}
+
+
 	@RequestMapping(value="")
 	public String test(HttpServletRequest request){
 		String ds = request.getParameter("postData");
