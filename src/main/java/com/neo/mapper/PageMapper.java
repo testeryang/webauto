@@ -30,4 +30,8 @@ public interface PageMapper {
 	
 	@Select("SELECT eleby FROM pagemanage" )
 	List<String> geteleby();
+
+	@Insert("INSERT INTO case (pagename, elename,doname,sendinfo) VALUES (#{pagename}, #{elename},#{doname},#{sendinfo})")
+	void savacase(@Param("pagename")String pagename,@Param("elename")String elename,@Param("doname")String doname,@Param("sendinfo")String sendinfo);
+
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.neo.services.savecaseservices;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -24,14 +25,17 @@ import com.neo.handle.help;
 import com.neo.services.docaseservices;
 import com.neo.services.pageservices;
 import com.neo.servicesimpl.docaseservicesimpl;
+import com.neo.services.savecaseservices;
 
 @RestController
 public class CaseController {
 	
 	@Resource
 	pageservices page;
-	
-	TestNG testNG = new TestNG();
+	@Resource
+    savecaseservices savecaseservices;
+
+//	TestNG testNG = new TestNG();
 	
 	@RequestMapping(value ="getpagename")
 	public JSONArray getpagename(){
@@ -103,10 +107,13 @@ public class CaseController {
 //
 //			docaseservicesimpl.docase(elename0[i], doname[i], url, sendinfo[i], eleby[i]);
 //		}
-		
 		return "正在执行脚本！请勿操作！";
 	}
-
+	@RequestMapping(value="savecase")
+    public String savecase(String pagename,String elename,String doname,String sendinfo){
+        savecaseservices.savecase(pagename,elename,doname,sendinfo);
+        return "保存成功";
+    }
 
 	@RequestMapping(value="")
 	public String test(HttpServletRequest request){

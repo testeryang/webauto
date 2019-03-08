@@ -27,8 +27,7 @@ public class docaseservicesimpl {
 //		docase(elename,doname, url, sendinfo,eleby);	
 //	}
 //	
-	
-	
+
 //	@Test
 	public static void docase(String elename,String doname,String url,String sendinfo,String eleby) {
 

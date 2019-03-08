@@ -118,9 +118,12 @@
 					<div id="olddiv">
 						<input type="submit" value="提交" name="Submit" >
 						<input type="button" value="添加一行" onclick="addYuan()">
+						<input type="button" value="保存脚本" onclick="savecase()">
 					</div>
 
 			</form>
+		</div>
+	</div>
 </body>
 <script>
 function arrayData(){            
@@ -148,15 +151,22 @@ function arrayData(){
 }
 </script>
 <script>
-	function addyang(){
-	var info=document.getElementById("info");
-	var div = document.createElement("div");
-	div.setAttribute("id", "newDiv");
-	div.setAttribute("value","newDiv");
-	div.setAttribute("type","select");
-	div.appendChild(document.createTextNode("选择我"));
-	<!--div.innerHTML = "js 动态添加div";-->
-　	info.appendChild(div);
+	function savecase(index) {
+		var info = document.getElementById("info");
+		$.ajax({
+			url : "http://localhost:8080/savacase",
+			type : "post",
+			dataType : "json",
+			data : info.serialize(),
+			success : function(data) {
+				console.log(data)
+
+			},
+			error : function(data) {
+				alert("分页出错~");
+			}
+		});
+	}
 	}
 </script>
 <script type="text/javascript">
@@ -185,6 +195,7 @@ function arrayData(){
 
 			clonedNode.children[4].setAttribute("id", "sendinfo"+i);
 			clonedNode.children[4].setAttribute("name", "sendinfo0");
+			clonedNode.children[4].value="";
 
 			var parent = info.parentNode;
 			parent.insertBefore( clonedNode, info.nextSibling );
