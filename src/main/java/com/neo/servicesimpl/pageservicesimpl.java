@@ -1,9 +1,14 @@
 package com.neo.servicesimpl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.neo.Entity.CaseEnity;
+import com.neo.mapper.CaseMapper;
+import org.apache.ibatis.annotations.Case;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.neo.Entity.PageEntity;
@@ -13,8 +18,11 @@ import com.neo.services.pageservices;
 @Service
 public class pageservicesimpl implements pageservices {
 
+
 	@Resource
 	PageMapper page;
+	@Resource
+	CaseMapper case1;
 
 	@Override
 	public List<PageEntity> getAll() {
@@ -53,4 +61,9 @@ public class pageservicesimpl implements pageservices {
 		// TODO Auto-generated method stub
 		return page.geteleby();
 	}
+	@Override
+	public List<CaseEnity> getcase(){
+		return case1.getcase();
+	}
+
 }

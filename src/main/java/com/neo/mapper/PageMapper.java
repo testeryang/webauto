@@ -1,6 +1,7 @@
 package com.neo.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -9,6 +10,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.neo.Entity.PageEntity;
+
+import javax.annotation.PreDestroy;
 
 @Mapper
 public interface PageMapper {
@@ -31,7 +34,10 @@ public interface PageMapper {
 	@Select("SELECT eleby FROM pagemanage" )
 	List<String> geteleby();
 
-	@Insert("INSERT INTO case (pagename, elename,doname,sendinfo) VALUES (#{pagename}, #{elename},#{doname},#{sendinfo})")
-	void savacase(@Param("pagename")String pagename,@Param("elename")String elename,@Param("doname")String doname,@Param("sendinfo")String sendinfo);
+	@Insert("INSERT INTO `case`(pagename,elename,doname,sendinfo,casename,url) VALUES (#{pagename}, #{elename},#{doname},#{sendinfo},#{casename},#{url})")
+	void savecase(@Param("pagename")String pagename, @Param("elename")String elename, @Param("doname")String doname, @Param("sendinfo")String sendinfo, @Param("casename")String casename,@Param("url")String url);
+
+	@Select("SELECT * from `case`")
+	List<Map<String,Object>> getcase();
 
 }

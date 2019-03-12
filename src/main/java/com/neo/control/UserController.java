@@ -3,9 +3,12 @@ package com.neo.control;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.neo.Entity.CaseEnity;
+import com.neo.services.pageservices;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -30,7 +33,8 @@ public class UserController {
 
 	@Autowired
 	private UserMapper usermapper;
-
+	@Resource
+	pageservices page;
 	@Autowired
 	public userservices userservices;	
 	
@@ -203,21 +207,25 @@ public class UserController {
 	@RequestMapping(value = "/tab")
 	public String gettab(Model model) {
         List<UserEntity> userlist= userservices.getAll();
-       for (UserEntity user : userlist) {
-        	System.out.println(user);
+//       for (UserEntity user : userlist) {
+//        	System.out.println(user);
 //        	model.addAttribute("username",user.username);
 //        	model.addAttribute("password",user.password);
 //        	model.addAttribute("user_sex",user.user_sex);
 //        	model.addAttribute("nickname",user.nickname);
-        	}
-        
+//        	}
+
         model.addAttribute("user", userlist);
         model.addAttribute("userlength", "共找到"+userlist.size()+"条年度预算记录，当前显示从第1条至第10条");
         System.out.println(userlist);
 		return "web/tab";
 	}
 	@RequestMapping(value = "/p3")
-	public String getp3() {
+	public String getcase(Model model){
+		List<CaseEnity> caselist = page.getcase();
+//		JSONArray arr=JSONArray.fromObject(caselist);
+		model.addAttribute("caseinfo",caselist);
+		System.out.println(caselist);
 		return "web/p3";
 	}
 	@RequestMapping(value = "/p2")

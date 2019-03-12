@@ -69,7 +69,7 @@ public class PageController {
     public String echartsView() throws JSONException{	
     	JSONArray arr=new JSONArray();
     	JSONObject json=new JSONObject();
-    	
+
     	for (int i = 1; i <= 12; i++) {
     		String s = String.valueOf(i);
     		if (i<10) {
@@ -77,7 +77,7 @@ public class PageController {
 			}else {
 				arr.add(resultservice.getsucess("-"+s+"-", "success").size());
 			}
-			
+
 		}
     	System.out.println(arr);
     	for (int i = 1; i <=12; i++) {

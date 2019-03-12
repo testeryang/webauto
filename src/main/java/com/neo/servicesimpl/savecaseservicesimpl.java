@@ -13,7 +13,7 @@ public class savecaseservicesimpl implements savecaseservices {
     PageMapper pageMapper;
 
     @Override
-    public void savecase(String pagename, String elename, String doname, String sendinfo) {
-        pageMapper.savacase(pagename,elename,doname,sendinfo);
+    public void savecase(String pagename, String elename, String doname, String sendinfo,String casename,String url) {
+        pageMapper.savecase(pagename,elename,doname,sendinfo,casename,url);
     }
 }

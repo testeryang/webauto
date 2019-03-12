@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.neo.Entity.CaseEnity;
 import com.neo.services.savecaseservices;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -16,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.testng.TestNG;
@@ -65,20 +67,19 @@ public class CaseController {
 		
 		 List<String> list=new ArrayList<String>();
 		 list=page.getdocase();
+
 		JSONArray jsonArray = JSONArray.fromObject(list);
 
 		return jsonArray;
 	
 	}
 	@RequestMapping(value ="geteleby")
-	public JSONArray geteleby(){
+	public String geteleby(){
 		
 		 List<String> list=new ArrayList<String>();
 		 list=page.geteleby();
-		 List<String> list2=new ArrayList<String>();
-		 list2=help.removeDuplicate(list);
-		JSONArray jsonArray = JSONArray.fromObject(list2);
-		return jsonArray;
+		JSONArray jsonArray = JSONArray.fromObject(list);
+		return jsonArray.toString();
 	
 	}
 	@RequestMapping(value ="docase")
@@ -93,25 +94,14 @@ public class CaseController {
 			}
 			docaseservicesimpl.docase(elename0[i], doname0[i], url, sendinfo0[i], eleby0[i]);
 		}
-
-
-//		for (int i=0; i<pagename0.length; i++){
-//			docaseservicesimpl.docase(elename0[i], doname[i], url, sendinfo[i], eleby[i]);
-//			if (i==0){
-//				System.out.println(pagename0[i]+elename0[i]+doname[i]+url+eleby[i]);
-//			}else{
-//			System.out.println(pagename0[i]+elename0[i]+doname[i]+eleby[i]);
-//			}
-//		}
-//		for(int i=0; i<pagename0.length; i++) {
-//
-//			docaseservicesimpl.docase(elename0[i], doname[i], url, sendinfo[i], eleby[i]);
-//		}
 		return "正在执行脚本！请勿操作！";
 	}
 	@RequestMapping(value="savecase")
-    public String savecase(String pagename,String elename,String doname,String sendinfo){
-        savecaseservices.savecase(pagename,elename,doname,sendinfo);
+    public String savecase(String[] pagename0,String[] elename0,String[] doname0,String[] sendinfo0,String casename,String url){
+
+		for (int i=0;i<pagename0.length;i++){
+			savecaseservices.savecase(pagename0[i],elename0[i],doname0[i],sendinfo0[i],casename,url);
+		}
         return "保存成功";
     }
 

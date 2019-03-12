@@ -11,14 +11,12 @@ import com.neo.Entity.Result;
 import com.neo.mapper.ResultMapper;
 import com.neo.services.ResultService;
 
-
 @Service
 @Transactional
 public class ResultServiceImpl implements ResultService{
 	
 	@Resource
 	ResultMapper resultmapper;
-	
 
 	@Override
 	public Result getresult() {
@@ -26,13 +24,11 @@ public class ResultServiceImpl implements ResultService{
 		return resultmapper.getresultinfo();
 	}
 
-
 	/*@Override
 	public List<String> get01success() {
 		
 		return resultmapper.get01success();
 	}
-
 
 	@Override
 	public List<String> get02success() {
