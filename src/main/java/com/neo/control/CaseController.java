@@ -103,21 +103,19 @@ public class CaseController {
 	}
 	@RequestMapping(value="savecase")
     public String savecase(String[] pagename0,String[] elename0,String[] doname0,String[] sendinfo0,String casename,String url,Model model){
-
 		for (int i=0;i<pagename0.length;i++){
 			savecaseservices.savecase(pagename0[i],elename0[i],doname0[i],sendinfo0[i],casename,url);
 		}
 		model.addAttribute("msg","保存成功");
-        return "web/p2";
+        return "保存成功";
     }
 	@RequestMapping(value="deletecase/{id}")
 	public String deletecase(@PathVariable("id")int id, Model model){
 		System.out.println(id);
 		delete.deletecaes(id);
 		model.addAttribute("msg","删除成功");
-		return "web/p3";
+		return "删除成功";
 	}
-
 
 	@RequestMapping(value="")
 	public String test(HttpServletRequest request){
