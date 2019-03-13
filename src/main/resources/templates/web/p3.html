@@ -82,6 +82,8 @@
             <th>修改时间</th>
             <th>信息值</th>
             <th>地址</th>
+            <th>操作</th>
+            <th>备注</th>
         </tr>
         <tr th:each="zdy : ${caseinfo}">
             <td th:text="${zdy.id}">Onions</td>
@@ -91,14 +93,34 @@
             <td th:text="${zdy.doname}">Onions</td>
             <td th:text="${zdy.sendinfo}">Onions</td>
             <td th:text="${zdy.url}">Onions</td>
-            <td></td>
-            <td></td>
-            <td></td>
-
+            <td><a th:href="@{'/deletecase/'+${zdy.id}}"  style="cursor:pointer;" onclick="return confirm('确定删除?');"> 删除</a></td>
+            <td align="center" th:text="${msg}"></td>
         </tr>
-
+        <div style="display:none" >修改成功</div>
     </table>
-    <p class="msg"><h5 th:text="${userlength}"></h5></p>
 </div>
 </body>
+<script>
+var p =document.getElementsByTagName("p");
+function delete(name) {
+		var dl = document.getElementByName("name");
+
+		$.ajax({
+			url : "http://localhost:8080/deletecase/dl",
+			type : "post",
+			data : dl,
+			success : function(data) {
+				console.log(data)
+				p.style.visibility="visible";
+				setTimeOut("append()",2000)
+			},
+			error : function(data) {
+				console.log("分页出错~");
+			}
+		});
+	}
+	function append(){
+       p.style.visibility="display";
+	}
+</script>
 </html>

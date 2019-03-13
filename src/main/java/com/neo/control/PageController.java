@@ -28,8 +28,6 @@ public class PageController {
 	@Autowired
 	private ResultService resultservice;
 
-	
-
 	@RequestMapping("/getpageinfo")
 	public String all(){
 		List<PageEntity> allinfo=pageservices.getAll();
@@ -79,7 +77,7 @@ public class PageController {
 			}
 
 		}
-    	System.out.println(arr);
+//    	System.out.println(arr);
     	for (int i = 1; i <=12; i++) {
     		String s = String.valueOf(i);
     		if (i<10) {
@@ -89,7 +87,7 @@ public class PageController {
 			}
 			
 		}
-    	System.out.println(arr);
+//    	System.out.println(arr);
     	json.put("data", arr);
     	return arr.toString();
     }

@@ -31,7 +31,7 @@ public interface PageMapper {
 	@Select("SELECT docase FROM do" )
 	List<String> getdocase();
 	
-	@Select("SELECT eleby FROM pagemanage" )
+	@Select("SELECT DISTINCT eleby FROM pagemanage" )
 	List<String> geteleby();
 
 	@Insert("INSERT INTO `case`(pagename,elename,doname,sendinfo,casename,url) VALUES (#{pagename}, #{elename},#{doname},#{sendinfo},#{casename},#{url})")

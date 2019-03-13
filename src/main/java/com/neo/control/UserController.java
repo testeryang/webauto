@@ -124,9 +124,6 @@ public class UserController {
 		System.out.println(username);
 		System.out.println(password);
 
-		// UsernamePasswordToken token = new UsernamePasswordToken(username,
-		// password,false);
-		// SecurityUtils.getSubject().login(token);
 		UserEntity user=null;
 		user = userservices.findusername(username);
 		System.out.println(user);
@@ -225,8 +222,9 @@ public class UserController {
 		List<CaseEnity> caselist = page.getcase();
 //		JSONArray arr=JSONArray.fromObject(caselist);
 		model.addAttribute("caseinfo",caselist);
-		System.out.println(caselist);
+//		System.out.println(caselist);
 		return "web/p3";
+
 	}
 	@RequestMapping(value = "/p2")
 	public String getp2() {

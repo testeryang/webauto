@@ -18,6 +18,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.testng.TestNG;
@@ -28,6 +29,7 @@ import com.neo.services.docaseservices;
 import com.neo.services.pageservices;
 import com.neo.servicesimpl.docaseservicesimpl;
 import com.neo.services.savecaseservices;
+import com.neo.services.deletecaseservices;
 
 @RestController
 public class CaseController {
@@ -36,6 +38,8 @@ public class CaseController {
 	pageservices page;
 	@Resource
     savecaseservices savecaseservices;
+	@Resource
+	deletecaseservices delete;
 
 //	TestNG testNG = new TestNG();
 	
@@ -76,11 +80,12 @@ public class CaseController {
 	@RequestMapping(value ="geteleby")
 	public String geteleby(){
 		
-		 List<String> list=new ArrayList<String>();
-		 list=page.geteleby();
+//		 List<String> list=new ArrayList<String>();
+		List<String> list=page.geteleby();
+
 		JSONArray jsonArray = JSONArray.fromObject(list);
+//		System.out.println(jsonArray.toString());
 		return jsonArray.toString();
-	
 	}
 	@RequestMapping(value ="docase")
 	public String docase(String[] pagename0,String[] elename0,String[] doname0,String url,String[] sendinfo0,String[] eleby0,HttpServletRequest request){
@@ -97,13 +102,22 @@ public class CaseController {
 		return "正在执行脚本！请勿操作！";
 	}
 	@RequestMapping(value="savecase")
-    public String savecase(String[] pagename0,String[] elename0,String[] doname0,String[] sendinfo0,String casename,String url){
+    public String savecase(String[] pagename0,String[] elename0,String[] doname0,String[] sendinfo0,String casename,String url,Model model){
 
 		for (int i=0;i<pagename0.length;i++){
 			savecaseservices.savecase(pagename0[i],elename0[i],doname0[i],sendinfo0[i],casename,url);
 		}
-        return "保存成功";
+		model.addAttribute("msg","保存成功");
+        return "web/p2";
     }
+	@RequestMapping(value="deletecase/{id}")
+	public String deletecase(@PathVariable("id")int id, Model model){
+		System.out.println(id);
+		delete.deletecaes(id);
+		model.addAttribute("msg","删除成功");
+		return "web/p3";
+	}
+
 
 	@RequestMapping(value="")
 	public String test(HttpServletRequest request){
